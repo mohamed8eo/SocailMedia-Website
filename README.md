@@ -1,19 +1,10 @@
-# 🌐 Socially - Modern Social Media App
+# Socailly
 
-A full-stack social media application built with Next.js, Clerk, Prisma, and PostgreSQL, featuring a beautiful UI, secure authentication, and real-time interactions.
+**Socailly** is a modern, full-stack social media web application built with Next.js 15, Prisma, Clerk authentication, and a PostgreSQL database. It features user profiles, posts, comments, likes, notifications, and a beautiful, responsive UI.
 
-![React](https://img.shields.io/badge/React-19.0.0-blue)
-![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-blueviolet)
-![Clerk](https://img.shields.io/badge/Auth-Clerk-red)
-![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0.0-06B6D4)
+---
 
-## 🟢 Live Demo
-
-[View the live app here!](https://socailly-website.vercel.app/)
-
-## ✨ Features
+## Features
 
 - **🔐 User Authentication** - Secure sign-up, sign-in, and session management with Clerk
 - **📝 Posts & Comments** - Create, like, comment, and delete posts
