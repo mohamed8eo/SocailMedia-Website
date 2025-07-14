@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Socailly
+
+**Socailly** is a modern, full-stack social media web application built with Next.js 15, Prisma, Clerk authentication, and a PostgreSQL database. It features user profiles, posts, comments, likes, notifications, and a beautiful, responsive UI.
+
+---
+
+## Features
+
+- **User Authentication:** Secure sign-up, sign-in, and session management with Clerk.
+- **User Profiles:** Each user has a customizable profile with bio, avatar, stats, and more.
+- **Feed:** See all posts from users, with real-time updates.
+- **Create Posts:** Authenticated users can create text/image posts.
+- **Like & Comment:** Interact with posts via likes and threaded comments.
+- **Notifications:** Get notified for likes, comments, and follows.
+- **Follow System:** Follow/unfollow users and see suggestions.
+- **Responsive Design:** Works beautifully on desktop and mobile.
+- **Modern UI:** Built with Tailwind CSS, shadcn/ui, and Radix UI components.
+
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js 15 (App Router), React 19, Tailwind CSS, shadcn/ui, Radix UI, Lucide Icons
+- **Backend:** Next.js API routes, Prisma ORM, PostgreSQL
+- **Authentication:** Clerk
+- **File Uploads:** UploadThing
+- **Notifications:** Real-time with Prisma and custom logic
+
+---
+
+## Database Schema
+
+- **User:** Profile info, posts, comments, likes, followers, following, notifications
+- **Post:** Content, image, author, comments, likes, notifications
+- **Comment:** Content, author, post, notifications
+- **Like:** User, post
+- **Follows:** Follower, following
+- **Notification:** Type (LIKE, COMMENT, FOLLOW), user, creator, post, comment
+
+See [`prisma/schema.prisma`](prisma/schema.prisma) for full details.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone & Install
+
+```bash
+git clone https://github.com/your-username/socailly.git
+cd socailly
+npm install
+```
+
+### 2. Set Up Environment
+
+- Copy `.env.example` to `.env` and fill in your database and Clerk credentials.
+
+### 3. Set Up Database
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+### 4. Run the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm run start` — Start production server
+- `npm run lint` — Lint code
+- `npx prisma studio` — Visual database browser
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app/` — Next.js app directory (pages, layouts, API routes)
+- `src/components/` — UI components (PostCard, CreatePost, Navbar, etc.)
+- `src/action/` — Server actions for posts, users, profiles, notifications
+- `prisma/schema.prisma` — Database schema
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy easily on [Vercel](https://vercel.com/) or your favorite platform.  
+See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
+
+---
+
+## Contributing
+
+Contributions are welcome! Please open issues or pull requests.
+
+---
+
+## License
+
+MIT
+
+---
+
+**Socailly** — A modern social media platform built with Next.js, Prisma, and Clerk.

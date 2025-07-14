@@ -14,8 +14,22 @@ import { Textarea } from "./ui/textarea";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
 
 
-type Posts = Awaited<ReturnType<typeof getPosts>>;
+type Posts = NonNullable<Awaited<ReturnType<typeof getPosts>>>;
 type Post = Posts[number];
+type Like = { userId: string };
+type Comment = {
+  id: string;
+  createdAt: Date;
+  authorId: string;
+  content: string;
+  postId: string;
+  author: {
+    id: string;
+    username: string;
+    name: string | null;
+    image: string | null;
+  };
+};
 
 function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
   const { user } = useUser();
@@ -23,7 +37,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
   const [isCommenting, setIsCommenting] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [hasLiked, setHasLiked] = useState(post.likes.some((like) => like.userId === dbUserId));
+  const [hasLiked, setHasLiked] = useState(post.likes.some((like: Like) => like.userId === dbUserId));
   const [optimisticLikes, setOptmisticLikes] = useState(post._count.likes);
   const [showComments, setShowComments] = useState(false);
 
@@ -31,12 +45,12 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
     if (isLiking) return;
     try {
       setIsLiking(true);
-      setHasLiked((prev) => !prev);
-      setOptmisticLikes((prev) => prev + (hasLiked ? -1 : 1));
+      setHasLiked((prev: boolean) => !prev);
+      setOptmisticLikes((prev: number) => prev + (hasLiked ? -1 : 1));
       await toggleLike(post.id);
     } catch (error) {
       setOptmisticLikes(post._count.likes);
-      setHasLiked(post.likes.some((like) => like.userId === dbUserId));
+      setHasLiked(post.likes.some((like: Like) => like.userId === dbUserId));
     } finally {
       setIsLiking(false);
     }
@@ -160,7 +174,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
             <div className="space-y-4 pt-4 border-t">
               <div className="space-y-4">
                 {/* DISPLAY COMMENTS */}
-                {post.comments.map((comment) => (
+                {post.comments.map((comment: Comment) => (
                   <div key={comment.id} className="flex space-x-3">
                     <Avatar className="size-8 flex-shrink-0">
                       <AvatarImage src={comment.author.image ?? "/avatar.png"} />
