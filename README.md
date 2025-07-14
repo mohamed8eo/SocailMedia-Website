@@ -1,113 +1,179 @@
-# Socailly
+# 🌐 Socially - Modern Social Media App
 
-**Socailly** is a modern, full-stack social media web application built with Next.js 15, Prisma, Clerk authentication, and a PostgreSQL database. It features user profiles, posts, comments, likes, notifications, and a beautiful, responsive UI.
+A full-stack social media application built with Next.js, Clerk, Prisma, and PostgreSQL, featuring a beautiful UI, secure authentication, and real-time interactions.
 
----
+![React](https://img.shields.io/badge/React-19.0.0-blue)
+![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-blueviolet)
+![Clerk](https://img.shields.io/badge/Auth-Clerk-red)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0.0-06B6D4)
 
-## Features
+## 🟢 Live Demo
 
-- **User Authentication:** Secure sign-up, sign-in, and session management with Clerk.
-- **User Profiles:** Each user has a customizable profile with bio, avatar, stats, and more.
-- **Feed:** See all posts from users, with real-time updates.
-- **Create Posts:** Authenticated users can create text/image posts.
-- **Like & Comment:** Interact with posts via likes and threaded comments.
-- **Notifications:** Get notified for likes, comments, and follows.
-- **Follow System:** Follow/unfollow users and see suggestions.
-- **Responsive Design:** Works beautifully on desktop and mobile.
-- **Modern UI:** Built with Tailwind CSS, shadcn/ui, and Radix UI components.
+[View the live app here!](https://socailly-website.vercel.app/)
 
----
+## ✨ Features
 
-## Tech Stack
+- **🔐 User Authentication** - Secure sign-up, sign-in, and session management with Clerk
+- **📝 Posts & Comments** - Create, like, comment, and delete posts
+- **❤️ Like System** - Like/unlike posts with instant feedback
+- **👥 Follow System** - Follow/unfollow users and see suggestions
+- **🔔 Notifications** - Real-time notifications for likes, comments, and follows
+- **🎨 Modern UI** - Beautiful, responsive interface with Tailwind CSS and shadcn/ui
+- **📱 Responsive Design** - Works seamlessly on desktop and mobile
+- **⚡ Real-time Updates** - Instant feedback with React Hot Toast
+- **🔍 User Profiles** - Customizable profiles with bio, avatar, and stats
 
-- **Frontend:** Next.js 15 (App Router), React 19, Tailwind CSS, shadcn/ui, Radix UI, Lucide Icons
-- **Backend:** Next.js API routes, Prisma ORM, PostgreSQL
-- **Authentication:** Clerk
-- **File Uploads:** UploadThing
-- **Notifications:** Real-time with Prisma and custom logic
+## 🛠️ Tech Stack
 
----
+### Frontend
+- **Next.js 15** - App Router, SSR, and modern React features
+- **React 19** - Latest React features
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Headless UI components
+- **Lucide React** - Icon library
+- **React Hot Toast** - Toast notifications
+- **date-fns** - Date formatting
 
-## Database Schema
+### Backend
+- **Next.js API Routes** - Server-side logic
+- **Prisma ORM** - Type-safe database access
+- **PostgreSQL** - Relational database
+- **Clerk** - Authentication service
+- **Svix** - Webhooks for Clerk events
+- **UploadThing** - File uploads
 
-- **User:** Profile info, posts, comments, likes, followers, following, notifications
-- **Post:** Content, image, author, comments, likes, notifications
-- **Comment:** Content, author, post, notifications
-- **Like:** User, post
-- **Follows:** Follower, following
-- **Notification:** Type (LIKE, COMMENT, FOLLOW), user, creator, post, comment
+## 🚀 Getting Started
 
-See [`prisma/schema.prisma`](prisma/schema.prisma) for full details.
+### Prerequisites
+- Node.js (v18 or higher)
+- PostgreSQL database
+- Clerk account (for authentication)
+- npm or yarn package manager
 
----
+### Installation
 
-## Getting Started
+1. **Clone the repository**
+   ```bash
+   git clone <your-repository-url>
+   cd socailly
+   ```
 
-### 1. Clone & Install
+2. **Install Dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-```bash
-git clone https://github.com/your-username/socailly.git
-cd socailly
-npm install
+3. **Environment Setup**
+
+   Create a `.env` file in the root directory:
+   ```env
+   DATABASE_URL=your_postgres_connection_string
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   SIGNING_SECRET=your_svix_signing_secret
+   ```
+
+4. **Set Up Database**
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   ```
+
+5. **Start the Development Server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+6. **Open your browser**
+   - App: http://localhost:3000
+
+## 📁 Project Structure
+
+```
+socailly/
+├── src/
+│   ├── action/           # Server actions (DB, auth, etc.)
+│   ├── app/              # Next.js app directory (pages, layout)
+│   ├── components/       # UI and feature components
+│   ├── context/          # React context providers
+│   ├── lib/              # Utility libraries (e.g., prisma)
+│   └── middleware.ts     # Clerk middleware
+├── prisma/
+│   └── schema.prisma     # Prisma schema
+├── public/
+│   └── favicon.ico
+├── .env
+├── package.json
+├── README.md
+└── ...
 ```
 
-### 2. Set Up Environment
+## 🔌 API Endpoints
 
-- Copy `.env.example` to `.env` and fill in your database and Clerk credentials.
+### Posts
+- `GET /api/posts` - Get all posts
+- `POST /api/posts` - Create a new post
+- `DELETE /api/posts/:id` - Delete a post
 
-### 3. Set Up Database
+### Comments
+- `POST /api/comments` - Add a comment
+- `DELETE /api/comments/:id` - Delete a comment
 
-```bash
-npx prisma generate
-npx prisma migrate dev --name init
-```
+### Users
+- `GET /api/users/:username` - Get user profile
+- `POST /api/follow/:id` - Follow/unfollow a user
 
-### 4. Run the App
+### Notifications
+- `GET /api/notifications` - Get notifications
 
-```bash
-npm run dev
-```
+## 🎯 Usage
 
-Visit [http://localhost:3000](http://localhost:3000) to see the app.
+1. **Authentication**: Sign up or log in using Clerk
+2. **Create Posts**: Share your thoughts and images
+3. **Interact**: Like, comment, and follow users
+4. **Notifications**: Get real-time updates
+5. **Profile**: Customize your profile and view stats
 
----
+## 🚀 Deployment
 
-## Scripts
+### Vercel (Recommended)
+1. Set environment variables in Vercel dashboard
+2. Connect your GitHub repository
+3. Deploy with one click
 
-- `npm run dev` — Start development server
-- `npm run build` — Build for production
-- `npm run start` — Start production server
-- `npm run lint` — Lint code
-- `npx prisma studio` — Visual database browser
+### Other Platforms
+- Make sure to set all required environment variables
+- Run `npm run build` and `npm start` for production
 
----
+## 🤝 Contributing
 
-## Project Structure
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- `src/app/` — Next.js app directory (pages, layouts, API routes)
-- `src/components/` — UI components (PostCard, CreatePost, Navbar, etc.)
-- `src/action/` — Server actions for posts, users, profiles, notifications
-- `prisma/schema.prisma` — Database schema
+## 📝 License
 
----
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
 
-## Deployment
+## 👨‍💻 Author
 
-Deploy easily on [Vercel](https://vercel.com/) or your favorite platform.  
-See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
+**Your Name**
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
----
+## 🙏 Acknowledgments
 
-## Contributing
-
-Contributions are welcome! Please open issues or pull requests.
-
----
-
-## License
-
-MIT
-
----
-
-**Socailly** — A modern social media platform built with Next.js, Prisma, and Clerk.
+- [Clerk](https://clerk.com/) for authentication
+- [shadcn/ui](https://ui.shadcn.com/) for beautiful components
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Vercel](https://vercel.com/) for deployment
+- [Prisma](https://prisma.io/) for database ORM
