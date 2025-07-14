@@ -9,7 +9,14 @@ import { LinkIcon, MapPinIcon } from "lucide-react";
 import { getUserByClerkid } from "@/action/user.action";
 
 async function Sidebar() {
-  const authUser = await currentUser();
+  let authUser = null;
+  try {
+    authUser = await currentUser();
+  } catch (err) {
+    console.error("Error fetching current user:", err);
+    return <UnAuthenticatedSidebar />;
+  }
+
   if (!authUser) return <UnAuthenticatedSidebar />;
 
   const user = await getUserByClerkid(authUser.id)

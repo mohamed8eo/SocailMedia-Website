@@ -2,6 +2,7 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
 
 export async function getUserByClerkid(clerkId:string) {
   return prisma.user.findUnique({
@@ -24,10 +25,22 @@ export async function getDbUserid() {
   const { userId: clerkId } = await auth();
   if (!clerkId) return null;
 
-  const user = await getUserByClerkid(clerkId);
-  if (!user) throw new Error('User not Found');
-
-  return user.id
+  let user = await getUserByClerkid(clerkId);
+  if (!user) {
+    // Try to fetch Clerk user info and create user in DB
+    const clerkUser = await currentUser();
+    if (!clerkUser) throw new Error("Clerk user not found");
+    user = await prisma.user.create({
+      data: {
+        clerkId: clerkUser.id,
+        email: clerkUser.emailAddresses[0]?.emailAddress || "",
+        name: clerkUser.firstName || "",
+        image: clerkUser.imageUrl || null,
+        username: clerkUser.username || (clerkUser.emailAddresses[0]?.emailAddress.split("@")[0] ?? clerkUser.id),
+      },
+    });
+  }
+  return user.id;
 }
 
 export async function getRandomUsers() {

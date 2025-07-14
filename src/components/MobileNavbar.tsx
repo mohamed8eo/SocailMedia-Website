@@ -45,7 +45,12 @@ function MobileNavbar({ unreadCount }: { unreadCount: number }) {
             <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
           <nav className="flex flex-col space-y-4 mt-6">
-            <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+            <Button
+              variant="ghost"
+              className="flex items-center gap-3 justify-start active:bg-gray-200 dark:active:bg-gray-700 transition"
+              asChild
+              onClick={() => setShowMobileMenu(false)}
+            >
               <Link href="/">
                 <HomeIcon className="w-4 h-4" />
                 Home
@@ -54,24 +59,36 @@ function MobileNavbar({ unreadCount }: { unreadCount: number }) {
 
             {user ? (
               <>
-                <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-3 justify-start active:bg-gray-200 dark:active:bg-gray-700 transition"
+                  asChild
+                  onClick={() => setShowMobileMenu(false)}
+                >
                   <Link href="/notifications">
                     <BellIcon className="w-4 h-4" />
                     Notifications
                   </Link>
                 </Button>
-                <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-3 justify-start active:bg-gray-200 dark:active:bg-gray-700 transition"
+                  asChild
+                  onClick={() => setShowMobileMenu(false)}
+                >
                   <Link
-                    href={`/profile/${
-                    user.emailAddresses[0].emailAddress.split("@")[0]
-                    }`}
+                    href={`/profile/${user.emailAddresses[0].emailAddress.split("@")[0]}`}
                   >
                     <UserIcon className="w-4 h-4" />
                     Profile
                   </Link>
                 </Button>
                 <SignOutButton>
-                  <Button variant="ghost" className="flex items-center gap-3 justify-start w-full">
+                  <Button
+                    variant="ghost"
+                    className="flex items-center gap-3 justify-start w-full active:bg-gray-200 dark:active:bg-gray-700 transition"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
                     <LogOutIcon className="w-4 h-4" />
                     Logout
                   </Button>
@@ -79,7 +96,11 @@ function MobileNavbar({ unreadCount }: { unreadCount: number }) {
               </>
             ) : (
               <SignInButton mode="modal">
-                <Button variant="default" className="w-full">
+                <Button
+                  variant="default"
+                  className="w-full active:scale-95 transition"
+                  onClick={() => setShowMobileMenu(false)}
+                >
                   Sign In
                 </Button>
               </SignInButton>
