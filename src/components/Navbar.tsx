@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import DesktopNavbar from "./DesktopNavbar";
 import MobileNavbar from "./MobileNavbar";
+import { useNotificationsContext } from "@/context/NotificationsContext";
 
-
-async function Navbar() {
+function Navbar() {
+  const { unreadCount } = useNotificationsContext();
 
   return (
     <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
@@ -15,8 +18,8 @@ async function Navbar() {
             </Link>
           </div>
 
-          <DesktopNavbar />
-          <MobileNavbar />
+          <DesktopNavbar unreadCount={unreadCount} />
+          <MobileNavbar unreadCount={unreadCount} />
         </div>
       </div>
     </nav>

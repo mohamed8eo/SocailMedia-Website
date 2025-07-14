@@ -16,7 +16,7 @@ import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
-function MobileNavbar() {
+function MobileNavbar({ unreadCount }: { unreadCount: number }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { user } = useUser();
   const { theme, setTheme } = useTheme();
