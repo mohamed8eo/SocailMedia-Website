@@ -30,7 +30,7 @@ export async function getDbUserid() {
     // Try to fetch Clerk user info and create user in DB
     const clerkUser = await currentUser();
     if (!clerkUser) throw new Error("Clerk user not found");
-    user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         clerkId: clerkUser.id,
         email: clerkUser.emailAddresses[0]?.emailAddress || "",
@@ -39,6 +39,9 @@ export async function getDbUserid() {
         username: clerkUser.username || (clerkUser.emailAddresses[0]?.emailAddress.split("@")[0] ?? clerkUser.id),
       },
     });
+    // Now fetch with _count
+    user = await getUserByClerkid(clerkUser.id);
+    if (!user) throw new Error("User creation failed");
   }
   return user.id;
 }
