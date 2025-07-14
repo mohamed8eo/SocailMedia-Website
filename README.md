@@ -3,6 +3,9 @@
 **Socailly** is a modern, full-stack social media web application built with Next.js 15, Prisma, Clerk authentication, and a PostgreSQL database. It features user profiles, posts, comments, likes, notifications, and a beautiful, responsive UI.
 
 ---
+## 🌐 Live Demo
+
+[Live Demo Link](https://socailly-website.vercel.app/) <!-- Replace with your deployed site URL -->
 
 ## Features
 
